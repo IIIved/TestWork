@@ -2,15 +2,56 @@
 
 using namespace std;
 
-struct ListNode
-{
-    ListNode* next = nullptr;
-    int value = 0;
+struct ListNode {
+    ListNode() {
+    }
+
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(nullptr) {}
 };
+
+
+
+void push(ListNode* &begin, int val)
+{
+    ListNode *lst = begin;
+    if(begin == nullptr)
+        begin = new ListNode(val);
+    else
+    {
+        while(lst->next != nullptr)
+            lst = lst->next;
+        lst->next = new ListNode(val);
+    }
+}
+
+void print(ListNode* &begin)
+{
+    ListNode *lst = begin;
+    while(lst->next != nullptr)
+    {
+        cout << lst->val << ", ";
+        lst = lst->next;
+    }
+    cout << lst->val << " ";
+    cout << endl;
+}
+
+void pushFront(ListNode* &head, int value)
+{
+
+    ListNode *ptr = new ListNode();
+    ptr -> val = value;
+
+    ptr -> next = head;
+    head = ptr;
+
+
+}
 
 class Solution {
 public:
-ListNode* head;
     ListNode* reverseList1(ListNode* head) {
         ListNode *prevNode = nullptr;
         ListNode *currentNode = head;
@@ -33,7 +74,7 @@ ListNode* head;
             return nullptr;
         }
 
-        if(node->next = nullptr) {
+        if (node->next == nullptr) {
             head = node;
             return node;
         }
@@ -45,44 +86,29 @@ ListNode* head;
         return node;
     }
 
-    ListNode* push(ListNode* &head, int val)
-    {
-        ListNode *lst = head;
-        if(head == nullptr)
-        {
-            head = new ListNode();
-            head->value = val;
-            return head;
-        }
-        else
-        {
-            while(lst->next != nullptr)
-                lst = lst->next;
-            lst->next = new ListNode();
-            lst->next->value = val;
-        }
-        return lst->next;
-    }
-
-    void print(ListNode* &begin)
-    {
-        ListNode *lst = begin;
-        while(lst->next != nullptr)
-        {
-            cout << lst->value << ", ";
-            lst = lst->next;
-        }
-        cout << lst->value << " ";
-        cout << endl;
-    }
+private:
+    ListNode* head = nullptr;
 };
-
 
 
 int main()
 {
-    Solution *head;
-    head = nullptr;
+    //В данном коде присутствует функция push и pushFront
+    //Рекурсивную инверсию не получилось сделать, т.к. особо еще не понимаю, как его связать с классом.
+    //Со структурами, без класса, все получается.
+
+    ListNode* begin = nullptr;
+    Solution solution;
+    pushFront(begin,5);
+    pushFront(begin,3);
+    pushFront(begin,7);
+    pushFront(begin,9);
+
+    print(begin);
+
+    begin = solution.reverseList1(begin);
+
+    print(begin);
 
     return 0;
 }
