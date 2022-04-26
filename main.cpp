@@ -11,8 +11,6 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
 };
 
-
-
 void push(ListNode* &begin, int val)
 {
     ListNode *lst = begin;
